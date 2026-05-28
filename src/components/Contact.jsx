@@ -14,6 +14,12 @@ export default function Contact() {
     setSent(true)
   }
 
+  const socials = [
+    { name: 'Instagram', url: 'https://instagram.com/yourprofile' },
+    { name: 'Behance', url: 'https://behance.net/yourprofile' },
+    { name: 'LinkedIn', url: 'https://linkedin.com/in/yourprofile' }
+  ]
+
   return (
     <section id="contact" className="contact">
       <div className="container contact__inner">
@@ -41,8 +47,16 @@ export default function Contact() {
           </div>
 
           <div className="contact__socials reveal">
-            {['Instagram','Behance','LinkedIn'].map(s => (
-              <a key={s} href="#" className="contact__social">{s}</a>
+            {socials.map(social => (
+              <a 
+                key={social.name} 
+                href={social.url} 
+                className="contact__social"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {social.name}
+              </a>
             ))}
           </div>
         </div>
