@@ -1,0 +1,193 @@
+/* ── Reels Section ── */
+.reels {
+  padding-block: var(--section-py);
+  background: var(--c-bg);
+}
+
+.reels__header { max-width: 600px; margin-bottom: 48px; }
+.reels__sub {
+  color: var(--c-stone);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 14px;
+}
+
+/* ── Grid — portrait cards in a row ── */
+.reels__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+/* ── Reel Card ── */
+.reel-card {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  outline-offset: 3px;
+}
+.reel-card:focus-visible { outline: 2px solid var(--c-terracotta); }
+
+.reel-card__media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--c-surface-alt);
+}
+
+/* Video */
+.reel-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reel-card:hover .reel-card__video,
+.reel-card:focus .reel-card__video {
+  transform: scale(1.04);
+}
+
+/* Play icon overlay */
+.reel-card__play-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 14, 8, 0.32);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.reel-card__play-icon span {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(250, 248, 244, 0.88);
+  color: var(--c-terracotta);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  transition: transform 0.25s;
+}
+.reel-card:hover .reel-card__play-icon span { transform: scale(1.1); }
+.reel-card__play-icon--hidden { opacity: 0; }
+
+/* Bottom label */
+.reel-card__label {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 32px 14px 14px;
+  background: linear-gradient(to top, rgba(20,14,8,0.80) 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+}
+.reel-card__tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-clay);
+  font-weight: 500;
+}
+.reel-card__title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: #FAF8F4;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* ── Modal ── */
+.reel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.reel-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 10, 6, 0.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.reel-modal__box {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.reel-modal__close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(250,248,244,0.25);
+  background: rgba(250,248,244,0.08);
+  color: #FAF8F4;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.reel-modal__close:hover { background: rgba(250,248,244,0.2); }
+
+.reel-modal__video {
+  display: block;
+  /* portrait: max height so it fits the viewport, width auto */
+  height: min(82vh, 640px);
+  width: auto;
+  max-width: min(400px, 90vw);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  background: #0e0a06;
+}
+
+.reel-modal__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reel-modal__tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-clay);
+  font-weight: 500;
+}
+.reel-modal__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #FAF8F4;
+  font-weight: 400;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .reels__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .reels__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}

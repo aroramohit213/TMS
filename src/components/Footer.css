@@ -1,0 +1,60 @@
+/* ── Footer ── */
+.footer {
+  background: var(--c-text);
+  padding-block: 48px;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer__brand { display: flex; flex-direction: column; gap: 4px; }
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--c-cream, #FAF8F4);
+  letter-spacing: 0.04em;
+}
+.footer__logo-mark { color: var(--c-clay); }
+
+.footer__tagline {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-stone);
+}
+
+.footer__nav {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.footer__link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-stone);
+  transition: color 0.2s;
+}
+.footer__link:hover { color: var(--c-clay); }
+
+.footer__copy {
+  font-size: 0.78rem;
+  color: var(--c-stone);
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+  .footer__inner { flex-direction: column; align-items: flex-start; }
+  .footer__nav   { gap: 20px; }
+}

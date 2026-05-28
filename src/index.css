@@ -1,0 +1,84 @@
+/* ════════════════════════════════════════
+   Ceramic Design System — Global Tokens
+   ════════════════════════════════════════ */
+:root {
+  /* Palette */
+  --c-bg:          #FAF8F4;
+  --c-surface:     #F2EDE4;
+  --c-surface-alt: #EAE3D8;
+  --c-sand:        #D9CEBB;
+  --c-clay:        #C4A882;
+  --c-terracotta:  #A97550;
+  --c-brown:       #7A5538;
+  --c-stone:       #9B9188;
+  --c-muted:       #7A7068;
+  --c-text:        #2E2A26;
+  --c-text-light:  #5C554E;
+  --c-border:      #DDD5C8;
+  --c-accent:      #B8865A;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+
+  /* Spacing / Shape */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-soft: 0 2px 20px rgba(46, 42, 38, 0.07);
+  --shadow-card: 0 4px 32px rgba(46, 42, 38, 0.10);
+
+  /* Layout */
+  --max-w: 1100px;
+  --section-py: clamp(64px, 10vw, 128px);
+
+  /* Base */
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 400;
+  color: var(--c-text);
+  background-color: var(--c-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { overflow-x: hidden; }
+body { background: var(--c-bg); color: var(--c-text); overflow-x: hidden; }
+img  { max-width: 100%; display: block; }
+a    { color: inherit; text-decoration: none; }
+ul   { list-style: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--c-text);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+}
+
+/* Scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }

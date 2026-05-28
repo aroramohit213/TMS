@@ -1,0 +1,101 @@
+/* ── About ── */
+.about {
+  padding-block: var(--section-py);
+  background: var(--c-surface);
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 100px);
+}
+
+/* Image column */
+.about__frame {
+  position: relative;
+  max-width: 360px;
+}
+.about__img-placeholder {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, var(--c-sand), var(--c-clay));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.about__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-lg);
+  display: block;
+}
+.about__frame-accent {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 60%;
+  height: 60%;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--c-clay);
+  z-index: -1;
+}
+
+/* Text column */
+.section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--c-terracotta);
+}
+
+.about__body {
+  color: var(--c-text-light);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.about__body em { color: var(--c-terracotta); font-style: italic; }
+
+/* Stats */
+.about__stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid var(--c-border);
+}
+.about__stat { display: flex; flex-direction: column; gap: 4px; }
+.about__stat-value {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--c-terracotta);
+  line-height: 1;
+}
+.about__stat-label {
+  font-size: 0.78rem;
+  color: var(--c-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .about__inner { grid-template-columns: 1fr; gap: 48px; }
+  .about__image-col { display: flex; justify-content: center; }
+  .about__frame { max-width: 280px; width: 100%; }
+  .about__stats { gap: 24px; }
+}
