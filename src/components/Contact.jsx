@@ -30,13 +30,13 @@ export default function Contact() {
           </p>
 
           <div className="contact__details reveal">
-            <a href="mailto:hello@yourstudio.com" className="contact__detail">
+            <a href="mailto:juhikalra72@gmail.com" className="contact__detail">
               <span className="contact__detail-icon">✉</span>
-              hello@yourstudio.com
+              juhikalra72@gmail.com
             </a>
-            <a href="tel:+10000000000" className="contact__detail">
+            <a href="tel:+919971326772" className="contact__detail">
               <span className="contact__detail-icon">☏</span>
-              +1 000 000 0000
+              +91 9971326772
             </a>
           </div>
 
@@ -88,7 +88,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   rows={6}
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your query..."
                   value={form.message}
                   onChange={handleChange}
                   required
