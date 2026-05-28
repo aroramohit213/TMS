@@ -18,7 +18,7 @@ export default function Contact() {
     { name: 'Instagram', url: 'https://instagram.com/themagicsmudge' },
     // { name: 'Behance', url: 'https://behance.net/yourprofile' },
     { name: 'Facebook', url: 'https://facebook.com/in/themagicsmudge' },
-    { name: 'WhatsApp', url: 'https://wa.me/919971326772' }
+    { name: 'WhatsApp', url: 'https://wa.me/919971326772?text=Hi%2C%20I%20would%20like%20to%20discuss%20a%20project' }
   ]
 
   return (
