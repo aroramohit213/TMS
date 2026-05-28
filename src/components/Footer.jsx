@@ -16,12 +16,12 @@ export default function Footer() {
         <nav className="footer__nav" aria-label="Footer navigation">
           <a href="#about"   className="footer__link">About</a>
           <a href="#work"    className="footer__link">Work</a>
-          <a href="#skills"  className="footer__link">Skills</a>
-          <a href="#contact" className="footer__link">Contact</a>
+          {/* <a href="#skills"  className="footer__link">Skills</a>
+          <a href="#contact" className="footer__link">Contact</a> */}
         </nav>
 
         <p className="footer__copy">
-          © {year} Studio. All rights reserved.
+          © {year} The Magic Smudge. All rights reserved.
         </p>
       </div>
     </footer>
