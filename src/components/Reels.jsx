@@ -10,32 +10,32 @@ const reels = [
   },
   {
     id: 2,
-    file: '/videos/haldi look reel.mp4',
-    title: 'Haldi Look',
-    label: 'Haldi',
-  },
-  {
-    id: 3,
-    file: '/videos/mehandi look reel.mp4',
-    title: 'Mehandi Look',
-    label: 'Mehandi',
-  },
-  {
-    id: 4,
     file: '/videos/wedding look reel.mp4',
     title: 'Wedding Look',
     label: 'Wedding',
   },
   {
-    id: 5,
+    id: 3,
     file: '/videos/wedding look reel 2.mp4',
-    title: 'Wedding Look II',
+    title: 'Wedding Look',
     label: 'Wedding',
+  },
+  {
+    id: 4,
+    file: '/videos/haldi look reel.mp4',
+    title: 'Haldi Look',
+    label: 'Haldi',
+  },
+  {
+    id: 5,
+    file: '/videos/mehandi look reel.mp4',
+    title: 'Mehandi Look',
+    label: 'Mehandi',
   },
   {
     id: 6,
     file: '/videos/wedding look reel 3.mp4',
-    title: 'Wedding Look III',
+    title: 'Wedding Look',
     label: 'Wedding',
   },
 ]
