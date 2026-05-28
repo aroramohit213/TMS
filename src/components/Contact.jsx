@@ -15,8 +15,8 @@ export default function Contact() {
   }
 
   const socials = [
-    { name: 'Instagram', url: 'https://instagram.com/yourprofile' },
-    { name: 'Behance', url: 'https://behance.net/yourprofile' },
+    { name: 'Instagram', url: 'https://instagram.com/themagicsmudge' },
+    // { name: 'Behance', url: 'https://behance.net/yourprofile' },
     { name: 'LinkedIn', url: 'https://linkedin.com/in/yourprofile' }
   ]
 
