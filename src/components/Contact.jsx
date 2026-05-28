@@ -17,7 +17,8 @@ export default function Contact() {
   const socials = [
     { name: 'Instagram', url: 'https://instagram.com/themagicsmudge' },
     // { name: 'Behance', url: 'https://behance.net/yourprofile' },
-    { name: 'Facebook', url: 'https://facebook.com/in/themagicsmudge' }
+    { name: 'Facebook', url: 'https://facebook.com/in/themagicsmudge' },
+    { name: 'WhatsApp', url: 'https://wa.me/919971326772' }
   ]
 
   return (
