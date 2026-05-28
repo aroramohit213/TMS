@@ -110,9 +110,9 @@ function ReelCard({ reel, onOpen, isModalOpen }) {
         />
 
         {/* Play icon — fades out on hover */}
-        <div className={`reel-card__play-icon${hovered ? ' reel-card__play-icon--hidden' : ''}`}>
+        {/* <div className={`reel-card__play-icon${hovered ? ' reel-card__play-icon--hidden' : ''}`}>
           <span>▶</span>
-        </div>
+        </div> */}
 
         {/* Bottom label */}
         <div className="reel-card__label">
