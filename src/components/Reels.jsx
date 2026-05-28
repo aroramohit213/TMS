@@ -84,7 +84,7 @@ function ReelCard({ reel, onOpen }) {
         {/* Bottom label */}
         <div className="reel-card__label">
           <span className="reel-card__tag">{reel.label}</span>
-          <span className="reel-card__title">{reel.title}</span>
+          {/* <span className="reel-card__title">{reel.title}</span> */}
         </div>
       </div>
     </button>
@@ -132,7 +132,7 @@ function ReelModal({ reel, onClose }) {
 
         <div className="reel-modal__info">
           <span className="reel-modal__tag">{reel.label}</span>
-          <h3 className="reel-modal__title">{reel.title}</h3>
+          {/* <h3 className="reel-modal__title">{reel.title}</h3> */}
         </div>
       </div>
     </div>
