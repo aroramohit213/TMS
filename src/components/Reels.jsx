@@ -40,28 +40,61 @@ const reels = [
   },
 ]
 
-/* ── Single card — hover preview, muted ── */
-function ReelCard({ reel, onOpen }) {
+/* ── Single card — visibility-based playback ── */
+function ReelCard({ reel, onOpen, isModalOpen }) {
   const videoRef = useRef(null)
+  const cardRef = useRef(null)
   const [hovered, setHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+
+  // Intersection Observer for scroll-based visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+        const v = videoRef.current
+        if (v) {
+          if (entry.isIntersecting && !isModalOpen) {
+            v.play().catch(() => {}) // Play when visible
+          } else {
+            v.pause()
+            v.currentTime = 0
+          }
+        }
+      },
+      { threshold: 0.5 } // Video plays when 50% visible
+    )
+
+    if (cardRef.current) observer.observe(cardRef.current)
+    return () => observer.disconnect()
+  }, [isModalOpen])
+
+  // Stop playing when modal opens
+  useEffect(() => {
+    if (isModalOpen && videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }, [isModalOpen])
 
   const playPreview = () => {
     setHovered(true)
-    videoRef.current?.play()
+    // On hover, play if visible (for desktop experience)
+    if (isVisible && videoRef.current) {
+      videoRef.current.play().catch(() => {})
+    }
   }
+
   const pausePreview = () => {
     setHovered(false)
-    const v = videoRef.current
-    if (v) { v.pause(); v.currentTime = 0 }
   }
 
   return (
     <button
+      ref={cardRef}
       className="reel-card reveal"
       onMouseEnter={playPreview}
       onMouseLeave={pausePreview}
-      onFocus={playPreview}
-      onBlur={pausePreview}
       onClick={() => onOpen(reel)}
       aria-label={`Play reel: ${reel.title}`}
     >
@@ -84,7 +117,6 @@ function ReelCard({ reel, onOpen }) {
         {/* Bottom label */}
         <div className="reel-card__label">
           <span className="reel-card__tag">{reel.label}</span>
-          {/* <span className="reel-card__title">{reel.title}</span> */}
         </div>
       </div>
     </button>
@@ -132,7 +164,6 @@ function ReelModal({ reel, onClose }) {
 
         <div className="reel-modal__info">
           <span className="reel-modal__tag">{reel.label}</span>
-          {/* <h3 className="reel-modal__title">{reel.title}</h3> */}
         </div>
       </div>
     </div>
@@ -152,13 +183,13 @@ export default function Reels() {
             Transformations<br /><em>in motion</em>
           </h2>
           <p className="reels__sub reveal">
-            Hover to preview · Click to watch with sound
+            Scroll to preview · Click to watch with sound
           </p>
         </div>
 
         <div className="reels__grid">
           {reels.map(r => (
-            <ReelCard key={r.id} reel={r} onOpen={setActive} />
+            <ReelCard key={r.id} reel={r} onOpen={setActive} isModalOpen={!!active} />
           ))}
         </div>
       </div>
