@@ -164,6 +164,7 @@ function ReelModal({ reel, onClose }) {
 
         <div className="reel-modal__info">
           <span className="reel-modal__tag">{reel.label}</span>
+          <h3 className="reel-modal__title">{reel.title}</h3>
         </div>
       </div>
     </div>
