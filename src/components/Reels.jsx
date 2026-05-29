@@ -4,37 +4,49 @@ import './Reels.css'
 const reels = [
   {
     id: 1,
-    file: '/videos/engagement look reel.mp4',
+    file:   '/videos/engagement look reel.opt.mp4',
+    webm:   '/videos/engagement look reel.webm',
+    poster: '/videos/engagement look reel.poster.webp',
     title: 'Engagement Look',
     label: 'Engagement',
   },
   {
     id: 2,
-    file: '/videos/wedding look reel.mp4',
+    file:   '/videos/wedding look reel.opt.mp4',
+    webm:   '/videos/wedding look reel.webm',
+    poster: '/videos/wedding look reel.poster.webp',
     title: 'Wedding Look',
     label: 'Wedding',
   },
   {
     id: 3,
-    file: '/videos/wedding look reel 2.mp4',
+    file:   '/videos/wedding look reel 2.opt.mp4',
+    webm:   '/videos/wedding look reel 2.webm',
+    poster: '/videos/wedding look reel 2.poster.webp',
     title: 'Wedding Look',
     label: 'Wedding',
   },
   {
     id: 4,
-    file: '/videos/haldi look reel.mp4',
+    file:   '/videos/haldi look reel.opt.mp4',
+    webm:   '/videos/haldi look reel.webm',
+    poster: '/videos/haldi look reel.poster.webp',
     title: 'Haldi Look',
     label: 'Haldi',
   },
   {
     id: 5,
-    file: '/videos/mehandi look reel.mp4',
+    file:   '/videos/mehandi look reel.opt.mp4',
+    webm:   '/videos/mehandi look reel.webm',
+    poster: '/videos/mehandi look reel.poster.webp',
     title: 'Mehandi Look',
     label: 'Mehandi',
   },
   {
     id: 6,
-    file: '/videos/wedding look reel 3.mp4',
+    file:   '/videos/wedding look reel 3.opt.mp4',
+    webm:   '/videos/wedding look reel 3.webm',
+    poster: '/videos/wedding look reel 3.poster.webp',
     title: 'Wedding Look',
     label: 'Wedding',
   },
@@ -46,23 +58,25 @@ function ReelCard({ reel, onOpen, isModalOpen }) {
   const cardRef = useRef(null)
   const [hovered, setHovered] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [srcLoaded, setSrcLoaded] = useState(false) // lazy: only set src once card is near viewport
 
-  // Intersection Observer for scroll-based visibility
+  // Intersection Observer — lower threshold (0.1) so src loads slightly before the card is fully visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting)
         const v = videoRef.current
-        if (v) {
-          if (entry.isIntersecting && !isModalOpen) {
-            v.play().catch(() => {}) // Play when visible
-          } else {
-            v.pause()
-            v.currentTime = 0
+        if (entry.isIntersecting) {
+          setSrcLoaded(true)
+          if (!isModalOpen && v) {
+            // Give React a tick to render the <source> elements, then load + play
+            setTimeout(() => { v.load(); v.play().catch(() => {}) }, 0)
           }
+        } else {
+          if (v) { v.pause(); v.currentTime = 0 }
         }
       },
-      { threshold: 0.5 } // Video plays when 50% visible
+      { threshold: 0.1, rootMargin: '100px' } // start loading 100px before entering view
     )
 
     if (cardRef.current) observer.observe(cardRef.current)
@@ -101,13 +115,16 @@ function ReelCard({ reel, onOpen, isModalOpen }) {
       <div className="reel-card__media">
         <video
           ref={videoRef}
-          src={reel.file}
+          poster={reel.poster}
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="none"
           className="reel-card__video"
-        />
+        >
+          {srcLoaded && <source src={reel.webm} type="video/webm" />}
+          {srcLoaded && <source src={reel.file} type="video/mp4" />}
+        </video>
 
         {/* Play icon — fades out on hover */}
         {/* <div className={`reel-card__play-icon${hovered ? ' reel-card__play-icon--hidden' : ''}`}>
@@ -156,11 +173,14 @@ function ReelModal({ reel, onClose }) {
 
         <video
           ref={videoRef}
-          src={reel.file}
+          poster={reel.poster}
           controls
           playsInline
           className="reel-modal__video"
-        />
+        >
+          <source src={reel.webm} type="video/webm" />
+          <source src={reel.file} type="video/mp4" />
+        </video>
 
         <div className="reel-modal__info">
           <span className="reel-modal__tag">{reel.label}</span>

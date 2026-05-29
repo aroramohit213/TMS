@@ -8,8 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prebuild": "node scripts/optimize-images.mjs",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "prebuild": "node scripts/optimize-images.mjs && node scripts/optimize-videos.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "optimize:videos": "node scripts/optimize-videos.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
