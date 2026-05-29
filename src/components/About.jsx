@@ -1,16 +1,15 @@
 import './About.css'
 
 const stats = [
-  { value: '8+',   label: 'Years of artistry'  },
+  { value: '5+',   label: 'Years of artistry'  },
   { value: '500+', label: 'Looks created'       },
-  { value: '130',  label: 'Weddings'            },
+  { value: '50+',  label: 'Weddings'            },
 ]
 
 export default function About() {
   return (
     <section id="about" className="about">
       <div className="container about__inner">
-
         <div className="about__image-col reveal">
           <div className="about__frame">
             <img
