@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
 import './App.css'
-import Navbar  from './components/Navbar'
-import Hero    from './components/Hero'
-import About   from './components/About'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import About from './components/About'
 import Gallery from './components/Gallery'
-import Reels   from './components/Reels'
+import Reels from './components/Reels'
 // import Videos  from './components/Videos'
 // import Skills  from './components/Skills'
 import Contact from './components/Contact'
-import Footer  from './components/Footer'
+import Footer from './components/Footer'
+import { Analytics } from '@vercel/analytics/react';
 
 function useScrollReveal() {
   useEffect(() => {
@@ -33,12 +34,13 @@ export default function App() {
 
   return (
     <>
+      <Analytics />
       <Navbar />
       <main>
-        <Hero    />
-        <About   />
+        <Hero />
+        <About />
         <Gallery />
-        <Reels   />
+        <Reels />
         {/* <Videos  /> */}
         {/* <Skills  /> */}
         <Contact />
