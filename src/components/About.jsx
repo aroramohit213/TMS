@@ -27,7 +27,7 @@ export default function About() {
             Beauty rooted in<br /><em>honest craft</em>
           </h2>
           <p className="about__body reveal">
-            I'm a makeup artist and beauty director with over eight years
+            I'm a makeup artist and beauty director with over five years
             of experience working across bridal, editorial, film, and special
             effects. My work is guided by one belief: <em>every face tells
             a story worth telling beautifully.</em>
