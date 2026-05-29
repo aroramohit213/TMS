@@ -2,10 +2,12 @@
  * optimize-images.mjs
  * Converts all JPEG/PNG images in public/images/ to WebP (quality 82).
  * Also re-encodes JPEG originals at quality 82 to shrink fallback files.
- * Run once:  npm run optimize:images
+ * Skips images that already have a .webp counterpart (safe to run on every build).
+ * Run manually:  npm run optimize:images
+ * Auto-runs via: prebuild (i.e. before every `npm run build`)
  */
 import sharp from 'sharp'
-import { readdir, stat, rename } from 'fs/promises'
+import { access, readdir, stat, rename } from 'fs/promises'
 import { join, basename, extname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -24,6 +26,13 @@ async function processImage(file) {
   const webpPath  = join(INPUT_DIR, `${name}.webp`)
   const tmpPath   = join(INPUT_DIR, `${name}.__tmp.jpg`)
   const isJpeg    = /\.jpe?g$/i.test(file)
+
+  // Skip if WebP already exists (new photos won't have one yet)
+  const alreadyDone = await access(webpPath).then(() => true).catch(() => false)
+  if (alreadyDone) {
+    console.log(`– ${file.padEnd(20)}  webp already exists, skipping`)
+    return
+  }
 
   const beforeStat = await stat(inputPath)
 
@@ -75,9 +84,9 @@ async function main() {
     return
   }
 
-  console.log(`\nOptimising ${images.length} images in public/images/\n`)
+  console.log(`\nChecking ${images.length} images in public/images/\n`)
   await Promise.all(images.map(processImage))
-  console.log('\n✅  All done.  Commit the new .webp files and updated JPEGs.\n')
+  console.log('\n✅  Done. Commit any new .webp files before deploying.\n')
 }
 
 main().catch(err => { console.error(err); process.exit(1) })

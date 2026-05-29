@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "prebuild": "node scripts/optimize-images.mjs",
     "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
