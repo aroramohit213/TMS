@@ -57,7 +57,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
-  background: #2a2420; /* warm skeleton shown while image loads */
+  background: #e8e3dc; /* warm neutral skeleton — blends with site background */
   outline-offset: 3px;
 }
 .gallery__item:focus-visible { outline: 2px solid var(--c-terracotta); }

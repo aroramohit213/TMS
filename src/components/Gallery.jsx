@@ -89,9 +89,9 @@ export default function Gallery() {
                   src={p.src}
                   alt={p.title}
                   className="gallery__thumb"
-                  loading={i < 6 ? 'eager' : 'lazy'}
+                  loading={i < 10 ? 'eager' : 'lazy'}
                   decoding="async"
-                  fetchPriority={i < 2 ? 'high' : 'auto'}
+                  fetchPriority={i < 4 ? 'high' : 'auto'}
                   onLoad={e => e.currentTarget.classList.add('gallery__thumb--loaded')}
                   ref={el => { if (el?.complete) el.classList.add('gallery__thumb--loaded') }}
                 />
