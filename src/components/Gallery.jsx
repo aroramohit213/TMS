@@ -4,20 +4,20 @@ import './Gallery.css'
 const CATS = ['All', 'Bridal', 'Editorial', 'Glam', 'SFX']
 
 const photos = [
-  { id:  1, src: '/images/0A3A1127.jpg',  cat: 'Bridal',    title: 'Golden Hour Bridal',   aspect: 'tall'   },
-  { id:  2, src: '/images/CG7A0581.JPG',  cat: 'Editorial', title: 'Desert Editorial',      aspect: 'wide'   },
-  { id:  3, src: '/images/CG7A0588.JPG',  cat: 'Glam',      title: 'Smoky Glam',            aspect: 'square' },
-  { id:  4, src: '/images/CG7A4805.JPG',  cat: 'SFX',       title: 'Fantasy Character',     aspect: 'tall'   },
-  { id:  5, src: '/images/0A3A1356.jpg',  cat: 'Bridal',    title: 'Ivory Romance',         aspect: 'square' },
-  { id:  6, src: '/images/CG7A0598.JPG',  cat: 'Editorial', title: 'Clay & Terracotta',     aspect: 'wide'   },
-  { id:  7, src: '/images/CG7A4806.JPG',  cat: 'Glam',      title: 'Golden Goddess',        aspect: 'tall'   },
-  { id:  8, src: '/images/0A3A1383.jpg',  cat: 'Bridal',    title: 'Soft Elegance',         aspect: 'square' },
-  { id:  9, src: '/images/CG7A4825.JPG',  cat: 'SFX',       title: 'Avant-Garde Frost',     aspect: 'wide'   },
-  { id: 10, src: '/images/CG7A4867.JPG',  cat: 'Editorial', title: 'Nude Luxe',             aspect: 'tall'   },
-  { id: 11, src: '/images/CG7A5592.JPG',  cat: 'Glam',      title: 'Bronze & Copper',       aspect: 'square' },
-  { id: 12, src: '/images/0A3A1407.jpg',  cat: 'Bridal',    title: 'Timeless Veil',         aspect: 'wide'   },
-  { id: 13, src: '/images/CG7A5614.JPG',  cat: 'Editorial', title: 'Luminous Editorial',    aspect: 'tall'   },
-  { id: 14, src: '/images/CG7A5616.JPG',  cat: 'Glam',      title: 'Copper & Clay Glam',    aspect: 'square' },
+  { id:  1, src: '/images/0A3A1127.jpg',  webp: '/images/0A3A1127.webp',  cat: 'Bridal',    title: 'Golden Hour Bridal',   aspect: 'tall'   },
+  { id:  2, src: '/images/CG7A0581.JPG',  webp: '/images/CG7A0581.webp',  cat: 'Editorial', title: 'Desert Editorial',      aspect: 'wide'   },
+  { id:  3, src: '/images/CG7A0588.JPG',  webp: '/images/CG7A0588.webp',  cat: 'Glam',      title: 'Smoky Glam',            aspect: 'square' },
+  { id:  4, src: '/images/CG7A4805.JPG',  webp: '/images/CG7A4805.webp',  cat: 'SFX',       title: 'Fantasy Character',     aspect: 'tall'   },
+  { id:  5, src: '/images/0A3A1356.jpg',  webp: '/images/0A3A1356.webp',  cat: 'Bridal',    title: 'Ivory Romance',         aspect: 'square' },
+  { id:  6, src: '/images/CG7A0598.JPG',  webp: '/images/CG7A0598.webp',  cat: 'Editorial', title: 'Clay & Terracotta',     aspect: 'wide'   },
+  { id:  7, src: '/images/CG7A4806.JPG',  webp: '/images/CG7A4806.webp',  cat: 'Glam',      title: 'Golden Goddess',        aspect: 'tall'   },
+  { id:  8, src: '/images/0A3A1383.jpg',  webp: '/images/0A3A1383.webp',  cat: 'Bridal',    title: 'Soft Elegance',         aspect: 'square' },
+  { id:  9, src: '/images/CG7A4825.JPG',  webp: '/images/CG7A4825.webp',  cat: 'SFX',       title: 'Avant-Garde Frost',     aspect: 'wide'   },
+  { id: 10, src: '/images/CG7A4867.JPG',  webp: '/images/CG7A4867.webp',  cat: 'Editorial', title: 'Nude Luxe',             aspect: 'tall'   },
+  { id: 11, src: '/images/CG7A5592.JPG',  webp: '/images/CG7A5592.webp',  cat: 'Glam',      title: 'Bronze & Copper',       aspect: 'square' },
+  { id: 12, src: '/images/0A3A1407.jpg',  webp: '/images/0A3A1407.webp',  cat: 'Bridal',    title: 'Timeless Veil',         aspect: 'wide'   },
+  { id: 13, src: '/images/CG7A5614.JPG',  webp: '/images/CG7A5614.webp',  cat: 'Editorial', title: 'Luminous Editorial',    aspect: 'tall'   },
+  { id: 14, src: '/images/CG7A5616.JPG',  webp: '/images/CG7A5616.webp',  cat: 'Glam',      title: 'Copper & Clay Glam',    aspect: 'square' },
 ]
 
 export default function Gallery() {
@@ -83,7 +83,19 @@ export default function Gallery() {
               onClick={() => open(i)}
               aria-label={`Open lightbox: ${p.title}`}
             >
-              <img src={p.src} alt={p.title} className="gallery__thumb" loading="lazy" />
+              <picture className="gallery__picture">
+                <source srcSet={p.webp} type="image/webp" />
+                <img
+                  src={p.src}
+                  alt={p.title}
+                  className="gallery__thumb"
+                  loading={i < 6 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  fetchPriority={i < 2 ? 'high' : 'auto'}
+                  onLoad={e => e.currentTarget.classList.add('gallery__thumb--loaded')}
+                  ref={el => { if (el?.complete) el.classList.add('gallery__thumb--loaded') }}
+                />
+              </picture>
               <div className="gallery__overlay">
                 <span className="gallery__overlay-cat">{p.cat}</span>
                 <span className="gallery__overlay-title">{p.title}</span>
@@ -112,11 +124,15 @@ export default function Gallery() {
             className="lb__panel"
             onClick={e => e.stopPropagation()}
           >
-            <img
-              src={filtered[lightbox].src}
-              alt={filtered[lightbox].title}
-              className="lb__img"
-            />
+            <picture className="lb__picture">
+              <source srcSet={filtered[lightbox].webp} type="image/webp" />
+              <img
+                src={filtered[lightbox].src}
+                alt={filtered[lightbox].title}
+                className="lb__img"
+                decoding="async"
+              />
+            </picture>
           </div>
 
           {/* Caption */}
