@@ -1,22 +1,11 @@
-import { useState } from 'react'
+import { useForm, ValidationError } from '@formspree/react'
 import './Contact.css'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [sent, setSent] = useState(false)
-
-  const handleChange = e =>
-    setForm(f => ({ ...f, [e.target.name]: e.target.value }))
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    // Replace with your preferred form handler / API call
-    setSent(true)
-  }
+  const [state, handleSubmit] = useForm('xjgzlqek')
 
   const socials = [
     { name: 'Instagram', url: 'https://instagram.com/themagicsmudge' },
-    // { name: 'Behance', url: 'https://behance.net/yourprofile' },
     { name: 'Facebook', url: 'https://facebook.com/in/themagicsmudge' },
     { name: 'WhatsApp', url: 'https://wa.me/919971326772?text=Hi%2C%20I%20would%20like%20to%20discuss%20a%20project' }
   ]
@@ -63,7 +52,7 @@ export default function Contact() {
         </div>
 
         <div className="contact__right reveal">
-          {sent ? (
+          {state.succeeded ? (
             <div className="contact__success">
               <span className="contact__success-icon">✦</span>
               <h3>Message sent!</h3>
@@ -78,24 +67,23 @@ export default function Contact() {
                   name="name"
                   type="text"
                   placeholder="Your name"
-                  value={form.name}
-                  onChange={handleChange}
                   required
                   autoComplete="name"
                 />
+                <ValidationError field="name" errors={state.errors} className="form-error" />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="contact">Contact Number</label>
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="your@email.com"
-                  value={form.email}
-                  onChange={handleChange}
+                  id="contact"
+                  name="contact"
+                  type="tel"
+                  maxLength={10}
+                  placeholder="Your contact number"
                   required
-                  autoComplete="email"
+                  autoComplete="tel"
                 />
+                <ValidationError field="contact" errors={state.errors} className="form-error" />
               </div>
               <div className="form-group">
                 <label htmlFor="message">Message</label>
@@ -104,13 +92,16 @@ export default function Contact() {
                   name="message"
                   rows={6}
                   placeholder="Tell me about your query..."
-                  value={form.message}
-                  onChange={handleChange}
                   required
                 />
+                <ValidationError field="message" errors={state.errors} className="form-error" />
               </div>
-              <button type="submit" className="btn btn--solid contact__submit">
-                Send Message
+              <button
+                type="submit"
+                className="btn btn--solid contact__submit"
+                disabled={state.submitting}
+              >
+                {state.submitting ? 'Sending…' : 'Send Message'}
               </button>
             </form>
           )}
